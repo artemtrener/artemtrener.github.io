@@ -35,6 +35,33 @@
             font-size: 18px;
             color: var(--muted);
         }
+		.about {
+    text-align: center;
+    padding: 28px 20px 40px;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    position: relative;
+}
+
+.accent-line {
+    content: "";
+    height: 3px;
+    width: 660px;
+    background: var(--accent);
+    margin: 0 auto 18px;
+    border-radius: 2px;
+    box-shadow: 0 0 12px rgba(196,40,58,0.4);
+    animation: fadeInLine 1.5s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInLine {
+    from { opacity: 0; transform: scaleX(0); }
+    to { opacity: 1; transform: scaleX(1); }
+}
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -143,7 +170,10 @@
 <body>
     <header>
         <img src="logo.PNG" alt="NNG Motors" class="logo" />
-        <div class="about">Качественные автозапчасти • Доставка по России • Опт и розница</div>
+        <div class="about">
+    <div class="accent-line"></div>
+    Качественные автозапчасти • Доставка по России • Опт и розница
+</div>
     </header>
     <main class="container">
         <div class="grid">
