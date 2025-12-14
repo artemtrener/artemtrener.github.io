@@ -1,373 +1,200 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NNG Motors — автозапчасти</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg: #0b0b0b;
-      --card: #141414;
-      --accent: #9e9e9e;
-      --text: #ffffff;
-      --muted: #b5b5b5;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      background: radial-gradient(circle at top, #161616, #000000 70%);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    /* HEADER */
-    header {
-      padding: 8px 24px 6px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .logo {
-      max-width: 340px;
-      width: 100%;
-      filter: drop-shadow(0 0 25px rgba(255,255,255,0.15));
-      animation: fadeDown 1s ease forwards;
-    }
-
-    /* GRID */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 16px 20px 80px;
-	  margin-top: 4vh;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-    }
-
-    /* CARD */
-    .card {
-      position: relative;
-      height: 220px;
-      border-radius: 20px;
-      overflow: hidden;
-      background: var(--card);
-      cursor: pointer;
-      text-decoration: none;
-      color: var(--text);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      filter: grayscale(100%) brightness(0.6);
-      transition: transform 0.5s ease, filter 0.5s ease;
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.1));
-    }
-
-    .card span {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      font-size: 20px;
-      font-weight: 600;
-      z-index: 2;
-      transition: transform 0.35s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
-    }
-
-    .card:hover::before {
-      transform: scale(1.1);
-      filter: grayscale(0%) brightness(0.9);
-    }
-
-    .card:hover span {
-      transform: translateY(-6px);
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .card {
-        height: 180px;
-      }
-    }
-	/* Анимация появления при скролле */
-.grid {
-  opacity: 0;
-  transform: translateY(120px);
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-.grid.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* CONTACTS */
-.contacts {
-  margin-top: 60px;
-  padding-bottom: 40px;
-  display: flex;
-  justify-content: center;
-  gap: 28px;
-}
-
-
-.contacts a {
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: #0f0f0f;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.contacts img {
-  width: 22px;
-  height: 22px;
-  filter: invert(1) grayscale(1);
-  opacity: 0.75;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.contacts a:hover {
-  transform: translateY(-4px);
-  background: #1a1a1a;
-}
-
-.contacts a:hover img {
-  opacity: 1;
-  transform: scale(1.1);
-}
-
-/* FOOTER */
-.footer {
-  text-align: center;
-  font-size: 13px;
-  color: rgba(255,255,255,0.45);
-  padding-bottom: 24px;
-  letter-spacing: 0.4px;
-}
-
-
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NNG Motors — автозапчасти</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0b0b;
+            --card: #141414;
+            --accent: #c4283a; /* Глубокий, не яркий красный */
+            --text: #ffffff;
+            --muted: #b5b5b5;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body {
+            background: radial-gradient(circle at top, #161616, #000000 70%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        header {
+            padding: 20px 24px;
+            text-align: center;
+        }
+        .logo {
+            max-width: 380px;
+            width: 100%;
+            filter: drop-shadow(0 0 30px rgba(255,255,255,0.2));
+            animation: fadeDown 1.2s ease;
+        }
+        .about {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: var(--muted);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 20px 80px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+        .grid.visible { opacity: 1; transform: translateY(0); }
+        .card {
+            position: relative;
+            height: 260px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--card);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+            transition: all 0.4s ease;
+        }
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--img) center/cover no-repeat;
+            filter: grayscale(80%) brightness(0.6);
+            transition: all 0.5s ease;
+        }
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.2));
+            transition: background 0.4s ease;
+        }
+        .card span {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            font-size: 24px;
+            font-weight: 700;
+            z-index: 2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            transition: all 0.4s ease;
+        }
+        .card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(196,40,58,0.1); /* Очень мягкая красная тень */
+        }
+        .card:hover::before {
+            transform: scale(1.15);
+            filter: grayscale(0%) brightness(1);
+        }
+        .card:hover::after {
+            background: linear-gradient(to top, rgba(196,40,58,0.4), rgba(0,0,0,0.2)); /* Лёгкий красный намёк только внизу */
+        }
+        .card:hover span {
+            transform: translateY(-8px);
+        }
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 600px) {
+            .card { height: 200px; }
+            .card span { font-size: 20px; }
+        }
+        .contacts {
+            margin-top: 80px;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .contacts a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #1a1a1a;
+            transition: all 0.3s ease;
+        }
+        .contacts a:hover {
+            transform: translateY(-6px) scale(1.1);
+            background: var(--accent);
+            box-shadow: 0 0 15px rgba(196,40,58,0.25); /* Супер-мягкое свечение */
+        }
+        .contacts img { width: 26px; filter: invert(1); opacity: 0.8; transition: opacity 0.3s; }
+        .contacts a:hover img { opacity: 1; }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+        }
+    </style>
 </head>
 <body>
-
-  <!-- HEADER -->
-  <header>
-    <img src="logo.PNG" alt="NNG Motors" class="logo" />
-  </header>
-
-  <!-- WIDGETS -->
-  <main class="container">
-    <div class="grid">
-
-      <a class="card" href="https://web.telegram.org/k/#-3474221024" target="_blank"
-         style="--img:url('https://avto-bolt.ru/upload/iblock/dbd/znx1z1pgwkjja02veyv7nd6k7230qfrk.jpg');">
-        <span>Крепеж для авто</span>
-      </a>
-
-      <a class="card" href="https://web.telegram.org/k/#-3474221024" target="_blank"
-         style="--img:url('https://logistics.ru/sites/default/files/2019-09/2439.ABC%20bearings%20in%20cars_2.jpg');">
-        <span>Подшипники</span>
-      </a>
-
-      <a class="card" href="https://web.telegram.org/k/#-3474221024" target="_blank"
-         style="--img:url('https://portal.myparts.pro/uploads/images/saved/01-17-2024_1131475f93f983524def3dca464469d2cf9f3e.jpg');">
-        <span>Полуоси</span>
-      </a>
-
-      <a class="card" href="https://web.telegram.org/k/#-3474221024" target="_blank"
-         style="--img:url('https://remontstartera.ru/userfiles/news/images/7/1.jpg');">
-        <span>Распредвалы</span>
-      </a>
-
-      <a class="card" href="https://web.telegram.org/k/#-3474221024" target="_blank"
-         style="--img:url('https://s0.rbk.ru/v6_top_pics/media/img/7/80/756310283736807.jpg');">
-        <span>LADA</span>
-      </a>
-
-      <a class="card" href="https://web.telegram.org/k/#-3474221024" target="_blank"
-         style="--img:url('https://chescrews.com/wp-content/uploads/2025/04/01-1.jpg');">
-        <span>Болты</span>
-      </a>
-	  
-	  <a class="card" href="https://web.telegram.org/k/#-3474221024" target="_blank"
-         style="--img:url('https://i.ytimg.com/vi/NC1WzBO_p1Y/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAiWJgeLK-RmgM0KVXqscL1j-CIuQ');">
-        <span>Еще че нибудь</span>
-      </a>
-	  
-	  <a class="card" href="https://web.telegram.org/k/#-3474221024" target="_blank"
-         style="--img:url('https://cs2.pikabu.ru/post_img2/2014/01/20/11/1390240105_1515891063.jpg');">
-        <span>И еще чето</span>
-      </a>
-
-    </div>
-	<div class="contacts">
-  <a href="https://web.telegram.org/k/#-3474221024" target="_blank" aria-label="Instagram">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" alt="Instagram">
-  </a>
-
-  <a href="https://web.telegram.org/k/#-3474221024" target="_blank" aria-label="Telegram">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/telegram.svg" alt="Telegram">
-  </a>
-
-  <a href="https://web.telegram.org/k/#-3474221024" target="_blank" aria-label="VK">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vk.svg" alt="VK">
-  </a>
-</div>
-
-<div class="footer">
-  © 2025 NNG Motors LTD. Все права защищены.
-</div>
-
-  </main>
-
-  <script>
-    // Поддержка будущего масштабирования: фон через CSS-переменную
-    document.querySelectorAll('.card').forEach(card => {
-      const img = card.getAttribute('style').match(/url\('(.+?)'\)/)[1];
-      card.style.setProperty('--img', `url('${img}')`);
-      card.style.setProperty('background-image', 'none');
-      card.style.setProperty('position', 'relative');
-      card.style.setProperty('--bg', `url('${img}')`);
-      card.style.setProperty('--overlay', '1');
-      card.style.setProperty('--scale', '1');
-      card.style.setProperty('--blur', '0');
-      card.style.setProperty('--brightness', '0.7');
-      card.style.setProperty('--grayscale', '1');
-      card.style.setProperty('--opacity', '1');
-      card.style.setProperty('--shadow', '1');
-      card.style.setProperty('--transition', '0.4s');
-      card.style.setProperty('--hover-scale', '1.1');
-      card.style.setProperty('--hover-brightness', '1');
-      card.style.setProperty('--hover-grayscale', '0');
-      card.style.setProperty('--hover-opacity', '1');
-      card.style.setProperty('--hover-shadow', '1');
-      card.style.setProperty('--hover-blur', '0');
-      card.style.setProperty('--hover-translate', '-8px');
-      card.style.setProperty('--hover-rotate', '0deg');
-      card.style.setProperty('--hover-skew', '0deg');
-      card.style.setProperty('--hover-glow', '0');
-      card.style.setProperty('--hover-saturate', '1');
-      card.style.setProperty('--hover-contrast', '1');
-      card.style.setProperty('--hover-hue', '0deg');
-      card.style.setProperty('--hover-shadow-color', 'rgba(0,0,0,0.8)');
-      card.style.setProperty('--hover-shadow-size', '40px');
-      card.style.setProperty('--hover-shadow-spread', '0');
-      card.style.setProperty('--hover-shadow-offset', '0 20px');
-      card.style.setProperty('--hover-shadow-blur', '50px');
-      card.style.setProperty('--hover-shadow-opacity', '1');
-      card.style.setProperty('--hover-shadow-intensity', '1');
-      card.style.setProperty('--hover-shadow-ease', 'ease');
-      card.style.setProperty('--hover-shadow-duration', '0.4s');
-      card.style.setProperty('--hover-shadow-delay', '0s');
-      card.style.setProperty('--hover-shadow-transform', 'none');
-      card.style.setProperty('--hover-shadow-filter', 'none');
-      card.style.setProperty('--hover-shadow-z', '1');
-      card.style.setProperty('--hover-shadow-x', '0');
-      card.style.setProperty('--hover-shadow-y', '20px');
-      card.style.setProperty('--hover-shadow-blur-radius', '50px');
-      card.style.setProperty('--hover-shadow-spread-radius', '0');
-      card.style.setProperty('--hover-shadow-color-final', 'rgba(0,0,0,0.9)');
-      card.style.setProperty('--hover-shadow-transition', '0.4s ease');
-      card.style.setProperty('--hover-shadow-transform-final', 'none');
-      card.style.setProperty('--hover-shadow-filter-final', 'none');
-      card.style.setProperty('--hover-shadow-z-final', '1');
-      card.style.setProperty('--hover-shadow-x-final', '0');
-      card.style.setProperty('--hover-shadow-y-final', '20px');
-      card.style.setProperty('--hover-shadow-blur-final', '50px');
-      card.style.setProperty('--hover-shadow-spread-final', '0');
-      card.style.setProperty('--hover-shadow-color-end', 'rgba(0,0,0,0.9)');
-      card.style.setProperty('--hover-shadow-opacity-end', '1');
-      card.style.setProperty('--hover-shadow-intensity-end', '1');
-      card.style.setProperty('--hover-shadow-ease-end', 'ease');
-      card.style.setProperty('--hover-shadow-duration-end', '0.4s');
-      card.style.setProperty('--hover-shadow-delay-end', '0s');
-      card.style.setProperty('--hover-shadow-transform-end', 'none');
-      card.style.setProperty('--hover-shadow-filter-end', 'none');
-      card.style.setProperty('--hover-shadow-z-end', '1');
-      card.style.setProperty('--hover-shadow-x-end', '0');
-      card.style.setProperty('--hover-shadow-y-end', '20px');
-      card.style.setProperty('--hover-shadow-blur-end', '50px');
-      card.style.setProperty('--hover-shadow-spread-end', '0');
-      card.style.setProperty('--hover-shadow-color-final-end', 'rgba(0,0,0,0.9)');
-    });
-
-    // Подстановка фоновых изображений
-    document.querySelectorAll('.card').forEach(card => {
-      const bg = card.getAttribute('style').match(/url\('(.+?)'\)/)[1];
-      card.style.setProperty('--bg-image', `url('${bg}')`);
-      card.style.removeProperty('style');
-      card.style.position = 'relative';
-      card.style.setProperty('--bg', `url('${bg}')`);
-      card.style.setProperty('--img', `url('${bg}')`);
-      card.querySelector('span');
-    });
-
-    // Применение фона
-    const style = document.createElement('style');
-    style.innerHTML = `.card::before { background-image: var(--img); }`;
-    document.head.appendChild(style);
-  </script>
-  
-  <script>
-  const grid = document.querySelector('.grid');
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        grid.classList.add('visible');
-      }
-    },
-    {
-      threshold: 0.1
-    }
-  );
-
-  observer.observe(grid);
-</script>
-
-
+    <header>
+        <img src="logo.PNG" alt="NNG Motors" class="logo" />
+        <div class="about">Качественные автозапчасти • Доставка по России • Опт и розница</div>
+    </header>
+    <main class="container">
+        <div class="grid">
+            <a class="card" href="https://t.me/nickitazzz" style="--img:url('https://avto-bolt.ru/upload/iblock/dbd/znx1z1pgwkjja02veyv7nd6k7230qfrk.jpg');">
+                <span>Крепеж для авто</span>
+            </a>
+            <a class="card" href="https://t.me/nickitazzz" style="--img:url('https://logistics.ru/sites/default/files/2019-09/2439.ABC%20bearings%20in%20cars_2.jpg');">
+                <span>Подшипники</span>
+            </a>
+            <a class="card" href="https://t.me/nickitazzz" style="--img:url('https://portal.myparts.pro/uploads/images/saved/01-17-2024_1131475f93f983524def3dca464469d2cf9f3e.jpg');">
+                <span>Полуоси</span>
+            </a>
+            <a class="card" href="https://t.me/nickitazzz" style="--img:url('https://remontstartera.ru/userfiles/news/images/7/1.jpg');">
+                <span>Распредвалы</span>
+            </a>
+            <a class="card" href="https://t.me/nickitazzz" style="--img:url('https://s0.rbk.ru/v6_top_pics/media/img/7/80/756310283736807.jpg');">
+                <span>LADA</span>
+            </a>
+            <a class="card" href="https://t.me/nickitazzz" style="--img:url('https://chescrews.com/wp-content/uploads/2025/04/01-1.jpg');">
+                <span>Болты и гайки</span>
+            </a>
+            <a class="card" href="https://t.me/nickitazzz" style="--img:url('https://i.ytimg.com/vi/NC1WzBO_p1Y/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAiWJgeLK-RmgM0KVXqscL1j-CIuQ');">
+                <span>Новая категория</span>
+            </a>
+			<a class="card" href="https://t.me/nickitazzz" style="--img:url('https://cs2.pikabu.ru/post_img2/2014/01/20/11/1390240105_1515891063.jpg');">
+                <span>Новая категория</span>
+            </a>
+        </div>
+        <div class="contacts">
+            <a href="https://www.instagram.com/b0gd.an41k/" aria-label="Instagram">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" alt="">
+            </a>
+            <a href="https://t.me/nickitazzz" aria-label="Telegram"> <!-- Исправил на твою ссылку -->
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/telegram.svg" alt="">
+            </a>
+            <a href="https://vk.com/id545731823" aria-label="VK">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vk.svg" alt="">
+            </a>
+            <a href="https://wa.me/79123456789" aria-label="WhatsApp">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/whatsapp.svg" alt="">
+            </a>
+        </div>
+        <div class="footer">
+            © 2025 NNG Motors LTD. Все права защищены. • Тел: +7 (228) 337-69-69
+        </div>
+    </main>
+    <script>
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        }, { threshold: 0.1 });
+        observer.observe(document.querySelector('.grid'));
+    </script>
 </body>
 </html>
-
-
-
