@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NNG Motors — Крепёжные клипсы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #181818;
+      --dark: #202020;
+      --gray-dark: #1e1e1e;
+      --gray: #2e2e2e;
+      --gray-mid: #555;
+      --gray-light: #aaa;
+      --white: #f5f5f5;
+      --orange: #ff6a00;
+      --orange-dim: rgba(255,106,0,0.12);
+      --orange-glow: rgba(255,106,0,0.35);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      position: fixed;
+      width: 12px; height: 12px;
+      background: var(--orange);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+      mix-blend-mode: screen;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--orange);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+      opacity: 0.5;
+    }
+    body:hover .cursor { opacity: 1; }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* HERO */
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 60px 20px;
+    }
+
+    .hero-bg-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(90deg, rgba(255,106,0,0.04) 0px, rgba(255,106,0,0.04) 1px, transparent 1px, transparent 80px),
+        repeating-linear-gradient(0deg, rgba(255,106,0,0.03) 0px, rgba(255,106,0,0.03) 1px, transparent 1px, transparent 80px);
+      animation: gridPulse 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes gridPulse {
+      from { opacity: 0.5; transform: scale(1); }
+      to   { opacity: 1;   transform: scale(1.02); }
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: glowPulse 4s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes glowPulse {
+      from { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+      to   { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+    }
+
+    .logo-wrap {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      animation: fadeUp 1s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo-img-placeholder {
+      width: 180px;
+      height: 180px;
+      border: 2px solid var(--orange);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 32px;
+      background: var(--gray-dark);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 40px var(--orange-glow), inset 0 0 20px rgba(0,0,0,0.5);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .logo-img-placeholder:hover {
+      box-shadow: 0 0 70px var(--orange-glow), inset 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .logo-img-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .logo-placeholder-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: var(--gray-mid);
+      letter-spacing: 2px;
+      position: absolute;
+    }
+
+    .logo-img-placeholder::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,106,0,0.08) 0%, transparent 60%);
+    }
+
+    .brand-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 10vw, 110px);
+      letter-spacing: 8px;
+      line-height: 1;
+      color: var(--white);
+      position: relative;
+    }
+
+    .brand-name span {
+      color: var(--orange);
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-top: 14px;
+      font-weight: 300;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 2;
+      animation: fadeUp 1.4s ease 0.6s both;
+    }
+
+    .scroll-hint span {
+      font-size: 9px;
+      letter-spacing: 4px;
+      color: var(--gray-mid);
+      text-transform: uppercase;
+    }
+
+    .scroll-arrow {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--orange), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+      50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      text-align: center;
+      padding: 80px 20px 60px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .section-title h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 6vw, 72px);
+      letter-spacing: 6px;
+      color: var(--white);
+    }
+
+    .section-title h2 span { color: var(--orange); }
+
+    .section-title p {
+      margin-top: 12px;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--gray-mid);
+      text-transform: uppercase;
+    }
+
+    .title-line {
+      width: 60px;
+      height: 2px;
+      background: var(--orange);
+      margin: 16px auto 0;
+    }
+
+    /* CATALOG GRID */
+    .catalog {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 120px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    /* 7th card spans full row centered */
+    .catalog .card:last-child {
+      grid-column: 2 / 3;
+    }
+
+    /* CARD */
+    .card {
+      position: relative;
+      background: var(--dark);
+      overflow: hidden;
+      cursor: none;
+      aspect-ratio: 4/3;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card:nth-child(1) { transition-delay: 0.05s; }
+    .card:nth-child(2) { transition-delay: 0.10s; }
+    .card:nth-child(3) { transition-delay: 0.15s; }
+    .card:nth-child(4) { transition-delay: 0.20s; }
+    .card:nth-child(5) { transition-delay: 0.25s; }
+    .card:nth-child(6) { transition-delay: 0.30s; }
+    .card:nth-child(7) { transition-delay: 0.35s; }
+
+    /* Placeholder image zone */
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%) brightness(0.65);
+      transition: filter 0.5s ease, transform 0.6s ease;
+    }
+
+    .card-img-placeholder {
+      position: absolute;
+      inset: 0;
+      background: var(--gray-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      overflow: hidden;
+    }
+
+    .card-img-placeholder .placeholder-icon,
+    .card-img-placeholder > span {
+      display: none;
+    }
+
+    /* card overlay */
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      transition: background 0.4s ease;
+    }
+
+    .card:hover .card-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.5) 60%, rgba(255,106,0,0.08) 100%);
+    }
+
+    .card:hover .card-img {
+      filter: grayscale(40%) brightness(0.65);
+      transform: scale(1.06);
+    }
+
+    /* orange top border reveal on hover */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+      z-index: 5;
+    }
+
+    .card:hover::before { transform: scaleX(1); }
+
+    /* card number */
+    .card-num {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: rgba(255,255,255,0.06);
+      line-height: 1;
+      transition: color 0.4s ease;
+      z-index: 3;
+    }
+
+    .card:hover .card-num { color: rgba(255,106,0,0.15); }
+
+    .card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(22px, 3vw, 32px);
+      letter-spacing: 3px;
+      line-height: 1.1;
+      color: var(--white);
+      position: relative;
+      z-index: 3;
+      transition: color 0.3s ease;
+    }
+
+    .card:hover .card-name { color: var(--orange); }
+
+    .card-sub {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gray-light);
+      text-transform: uppercase;
+      margin-top: 6px;
+      position: relative;
+      z-index: 3;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
+    }
+
+    .card:hover .card-sub { opacity: 1; transform: translateY(0); }
+
+    .card-arrow {
+      position: absolute;
+      bottom: 28px;
+      right: 28px;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translate(6px, 6px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 4;
+    }
+
+    .card:hover .card-arrow { opacity: 1; transform: translate(0, 0); }
+
+    .card-arrow svg { fill: var(--orange); width: 14px; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--gray);
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gray-mid);
+      text-transform: uppercase;
+    }
+
+    footer span { color: var(--orange); }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      .catalog { grid-template-columns: 1fr 1fr; gap: 2px; }
+      .catalog .card:last-child { grid-column: 1 / 3; max-width: 50%; justify-self: center; }
+      .card { aspect-ratio: 1; }
+    }
+
+    @media (max-width: 380px) {
+      .catalog { grid-template-columns: 1fr; }
+      .catalog .card:last-child { grid-column: 1; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- HERO -->
+  <header>
+    <div class="hero-bg-lines"></div>
+    <div class="hero-glow"></div>
+
+    <div class="logo-wrap">
+      <!-- ЛОГОТИП: замените src на путь к вашему изображению -->
+      <div class="logo-img-placeholder" id="logoZone">
+        
+          <img src="C:\Users\Artem\Downloads\logo.PNG" alt="Логотип" />
+       
+        <span class="logo-placeholder-text"></span>
+      </div>
+
+      <div class="brand-name">NNG<span>MOTORS</span></div>
+      <div class="brand-tagline">Запчасти для автомобилей</div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Каталог</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </header>
+
+  <!-- CATALOG -->
+  <div class="section-title">
+    <h2>Наш <span>Каталог</span></h2>
+    <p>7 категорий крепёжных клипс</p>
+    <div class="title-line"></div>
+  </div>
+
+  <section class="catalog" id="catalog">
+
+    <!-- 1 -->
+    <article class="card">
+      <div class="card-img-placeholder">
+          <img class="card-img" src="C:\Users\Artem\Pictures\Screenshots\Снимок экрана 2026-04-12 012421.png" alt="Клипсы с нажимным штырьком" />
+        <div class="placeholder-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg></div>
+        <span>Фото товара</span>
+      </div>
+      <div class="card-num">01</div>
+      <div class="card-overlay">
+        <div class="card-name">С нажимным штырьком</div>
+        <div class="card-sub">Push-type clips</div>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </article>
+
+    <!-- 2 -->
+    <article class="card">
+      <div class="card-img-placeholder">
+			<img class="card-img" src="C:\Users\Artem\Pictures\Screenshots\Снимок экрана 2026-04-12 012649.png" alt="Клипсы с нажимным штырьком" />
+        <div class="placeholder-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg></div>
+        <span>Фото товара</span>
+      </div>
+      <div class="card-num">02</div>
+      <div class="card-overlay">
+        <div class="card-name">С резьбовым штырьком</div>
+        <div class="card-sub">Screw-type clips</div>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </article>
+
+    <!-- 3 -->
+    <article class="card">
+      <div class="card-img-placeholder">
+			<img class="card-img" src="C:\Users\Artem\Pictures\Screenshots\Снимок экрана 2026-04-12 012945.png" alt="Клипсы с нажимным штырьком" />
+        <div class="placeholder-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg></div>
+        <span>Фото товара</span>
+      </div>
+      <div class="card-num">03</div>
+      <div class="card-overlay">
+        <div class="card-name">Фигурные клипсы</div>
+        <div class="card-sub">Shaped clips</div>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </article>
+
+    <!-- 4 -->
+    <article class="card">
+      <div class="card-img-placeholder">
+			<img class="card-img" src="C:\Users\Artem\Pictures\Screenshots\Снимок экрана 2026-04-12 013057.png" alt="Клипсы с нажимным штырьком" />
+        <div class="placeholder-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg></div>
+        <span>Фото товара</span>
+      </div>
+      <div class="card-num">04</div>
+      <div class="card-overlay">
+        <div class="card-name">Клипсы-вставки</div>
+        <div class="card-sub">Insert clips</div>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </article>
+
+    <!-- 5 -->
+    <article class="card">
+      <div class="card-img-placeholder">
+			<img class="card-img" src="C:\Users\Artem\Pictures\Screenshots\Снимок экрана 2026-04-12 013153.png" alt="Клипсы с нажимным штырьком" />
+        <div class="placeholder-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg></div>
+        <span>Фото товара</span>
+      </div>
+      <div class="card-num">05</div>
+      <div class="card-overlay">
+        <div class="card-name">Клипсы-ёрши</div>
+        <div class="card-sub">Barbed clips</div>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article class="card">
+      <div class="card-img-placeholder">
+			<img class="card-img" src="C:\Users\Artem\Pictures\Screenshots\Снимок экрана 2026-04-12 013247.png" alt="Клипсы с нажимным штырьком" />
+        <div class="placeholder-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg></div>
+        <span>Фото товара</span>
+      </div>
+      <div class="card-num">06</div>
+      <div class="card-overlay">
+        <div class="card-name">Клипсы-заглушки</div>
+        <div class="card-sub">Plug caps clips</div>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </article>
+
+    <!-- 7 -->
+    <article class="card">
+      <div class="card-img-placeholder">
+			<img class="card-img" src="C:\Users\Artem\Pictures\Screenshots\Снимок экрана 2026-04-12 013506.png" alt="Клипсы с нажимным штырьком" />
+        <div class="placeholder-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg></div>
+        <span>Фото товара</span>
+      </div>
+      <div class="card-num">07</div>
+      <div class="card-overlay">
+        <div class="card-name">Клипсы-держатели</div>
+        <div class="card-sub">Holder clips</div>
+      </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </article>
+
+  </section>
+
+  <footer>
+    <p>&copy; 2025 <span>NNG Motors</span> — Все права защищены</p>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
+    });
+
+    (function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) *.12;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(animateRing);
+    })();
+
+    document.querySelectorAll('.card, a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+        ring.style.width = '60px';
+        ring.style.height = '60px';
+        ring.style.opacity = '0.9';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '12px';
+        cursor.style.height = '12px';
+        ring.style.width = '36px';
+        ring.style.height = '36px';
+        ring.style.opacity = '0.5';
+      });
+    });
+
+    // Scroll reveal
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach(c => observer.observe(c));
+  </script>
+</body>
+</html>
